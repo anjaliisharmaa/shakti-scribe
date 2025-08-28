@@ -31,7 +31,7 @@ export default function Sidebar({ activeView, onViewChange, onShowReadme }: Side
   ]
 
   return (
-    <aside className="w-64 bg-gradient-to-b from-shakti-purple to-shakti-magenta dark:from-shakti-charcoal dark:to-gray-900 flex flex-col text-white shadow-xl">
+    <aside className="fixed left-0 top-0 w-64 h-screen bg-gradient-to-b from-shakti-purple to-shakti-magenta dark:from-shakti-charcoal dark:to-gray-900 flex flex-col text-white shadow-xl z-10 overflow-y-auto">
       {/* Logo Section */}
       <div className="p-6 border-b border-white/10">
         <div className="flex items-center gap-3 mb-2">

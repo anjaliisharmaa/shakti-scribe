@@ -155,26 +155,28 @@ What's one boundary you need to set at work this week? 👇`,
   }
 
   return (
-    <main className="flex min-h-screen bg-shakti-white dark:bg-shakti-charcoal">
+    <main className="min-h-screen bg-shakti-white dark:bg-shakti-charcoal">
       <Sidebar 
         activeView={activeView}
         onViewChange={handleViewChange}
         onShowReadme={() => setShowReadme(true)}
       />
       
-      <ControlPanel 
-        onGenerate={handleGenerate}
-        isGenerating={canvasState === 'generating'}
-      />
-      
-      <OutputCanvasNew
-        state={canvasState}
-        generatedContent={generatedContent}
-        onEdit={() => {}}
-        onCopy={handleCopyContent}
-        onRegenerate={handleRegenerate}
-        onSave={handleSaveToHistory}
-      />
+      <div className="ml-64 flex min-h-screen">
+        <ControlPanel 
+          onGenerate={handleGenerate}
+          isGenerating={canvasState === 'generating'}
+        />
+        
+        <OutputCanvasNew
+          state={canvasState}
+          generatedContent={generatedContent}
+          onEdit={() => {}}
+          onCopy={handleCopyContent}
+          onRegenerate={handleRegenerate}
+          onSave={handleSaveToHistory}
+        />
+      </div>
 
       <ReadmeModal 
         isOpen={showReadme}
