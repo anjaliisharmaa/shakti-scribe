@@ -59,7 +59,7 @@ export default function OutputCanvas({
   }
 
   const renderInitialState = () => (
-    <div className="flex flex-col items-center justify-center text-center h-full">
+    <div className="flex flex-col items-center justify-center text-center min-h-[calc(100vh-4rem)]">
       <div className="mb-8">
         <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-shakti-purple/20 to-shakti-magenta/20 rounded-3xl flex items-center justify-center">
           <span className="text-6xl font-bold bg-gradient-to-r from-shakti-purple to-shakti-magenta bg-clip-text text-transparent">
@@ -95,7 +95,7 @@ export default function OutputCanvas({
   )
 
   const renderGeneratingState = () => (
-    <div className="flex flex-col items-center justify-center text-center h-full">
+    <div className="flex flex-col items-center justify-center text-center min-h-[calc(100vh-4rem)]">
       <div className="mb-8">
         <div className="relative">
           <div className="w-20 h-20 border-4 border-shakti-purple/30 rounded-full animate-spin">
