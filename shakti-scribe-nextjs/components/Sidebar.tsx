@@ -22,12 +22,6 @@ export default function Sidebar({ activeView, onViewChange, onShowReadme }: Side
       label: 'Content History',
       description: 'View past generations'
     },
-    { 
-      id: 'settings', 
-      icon: '⚙️', 
-      label: 'Settings',
-      description: 'API keys & preferences'
-    },
   ]
 
   return (
