@@ -48,34 +48,40 @@ const contentTypes: ContentType[] = [
 
 const pillars: Pillar[] = [
   { 
+    icon: '🌸', 
+    label: 'Gynika', 
+    value: 'gynika',
+    description: 'Flow friend (menstruation, puberty, and contraception)'
+  },
+  { 
+    icon: '💕', 
+    label: 'Maaya', 
+    value: 'maaya',
+    description: 'For moms, by heart (pregnancy, child birth, and baby care)'
+  },
+  { 
+    icon: '�', 
+    label: 'Meher', 
+    value: 'meher',
+    description: 'Gentle guide (emotional support for trauma, anxiety, and abuse)'
+  },
+  { 
     icon: '⚖️', 
-    label: 'Know Your Rights', 
-    value: 'rights',
-    description: 'Legal empowerment & POSH Act'
+    label: 'Nyaya', 
+    value: 'nyaya',
+    description: 'Rights ally (indian laws on consent, abortion, and family rights)'
   },
   { 
-    icon: '🩺', 
-    label: 'Health Unfiltered', 
-    value: 'health',
-    description: 'Periods, PCOS, wellness'
-  },
-  { 
-    icon: '🤯', 
-    label: 'Mind Matters', 
-    value: 'mind',
-    description: 'Mental health & boundaries'
-  },
-  { 
-    icon: '✨', 
-    label: 'Wishes Vault Wisdom', 
-    value: 'wishes',
-    description: 'Personal autonomy & planning'
+    icon: '🔥', 
+    label: 'Vaanya', 
+    value: 'vaanya',
+    description: 'Age rebel (menopause, hormonal health, and women\'s empowerment)'
   },
 ]
 
 export default function ControlPanel({ onGenerate, isGenerating }: ControlPanelProps) {
   const [type, setType] = useState('video')
-  const [pillar, setPillar] = useState('rights')
+  const [pillar, setPillar] = useState('gynika')
   const [prompt, setPrompt] = useState('')
 
   const handleGenerate = () => {
