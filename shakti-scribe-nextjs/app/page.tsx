@@ -83,20 +83,60 @@ What's one boundary you need to set at work this week? 👇`,
   const handleGenerate = async (data: { type: string; pillar: string; prompt: string }) => {
     setCanvasState('generating')
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      console.log('🚨 CALLING REAL API!', data)
+      
+      // Call the actual API
+      const response = await fetch('/api/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`)
+      }
+
+      const result = await response.json()
+      console.log('✅ API Response:', result)
+      
+      if (result.success) {
+        const newContent: GeneratedContent = {
+          type: data.type,
+          pillar: data.pillar,
+          prompt: data.prompt,
+          content: result.content,
+          timestamp: new Date()
+        }
+        
+        setGeneratedContent(newContent)
+        setCanvasState('content')
+      } else {
+        throw new Error('API returned unsuccessful response')
+      }
+      
+    } catch (error) {
+      console.error('❌ API Failed:', error)
+      
+      // Fallback to mock content only if API fails
       const content = generateMockContent(data.type, data.pillar, data.prompt)
       const newContent: GeneratedContent = {
         type: data.type,
         pillar: data.pillar,
         prompt: data.prompt,
-        content,
+        content: {
+          ...content,
+          fallback: true,
+          error: error.toString()
+        },
         timestamp: new Date()
       }
       
       setGeneratedContent(newContent)
       setCanvasState('content')
-    }, 2000)
+    }
   }
 
   const handleSaveToHistory = () => {
