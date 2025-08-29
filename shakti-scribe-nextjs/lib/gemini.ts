@@ -7,8 +7,8 @@ if (!process.env.GEMINI_API_KEY) {
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
 
-// Get the Gemini Pro model
-export const geminiModel = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' })
+// Get the Gemini Pro model (use flash for testing to save quota)
+export const geminiModel = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
 
 // Configuration for different content types
 export const geminiConfig = {
@@ -41,11 +41,42 @@ export const geminiConfig = {
 // Helper function to generate content with Gemini
 export async function generateWithGemini(prompt: string): Promise<string> {
   try {
+    console.log('🔑 API Key exists:', !!process.env.GEMINI_API_KEY)
+    console.log('📝 Prompt length:', prompt.length)
+    console.log('🤖 Calling Gemini API...')
+    
     const result = await geminiModel.generateContent(prompt)
     const response = await result.response
-    return response.text()
+    const text = response.text()
+    
+    console.log('✅ Gemini response received, length:', text.length)
+    return text
   } catch (error) {
-    console.error('Gemini generation error:', error)
-    throw new Error('Failed to generate content with Gemini')
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    const errorName = error instanceof Error ? error.name : 'Unknown'
+    const errorStack = error instanceof Error ? error.stack : undefined
+    
+    console.error('❌ Gemini generation error details:', {
+      message: errorMessage,
+      name: errorName,
+      stack: errorStack
+    })
+    
+    // Check if it's an API key issue
+    if (errorMessage.includes('API_KEY') || errorMessage.includes('api key')) {
+      throw new Error('Invalid or missing Gemini API key')
+    }
+    
+    // Check if it's a quota issue
+    if (errorMessage.includes('quota') || errorMessage.includes('limit')) {
+      throw new Error('Gemini API quota exceeded')
+    }
+    
+    // Check if it's a safety filter issue
+    if (errorMessage.includes('safety') || errorMessage.includes('blocked')) {
+      throw new Error('Content blocked by Gemini safety filters')
+    }
+    
+    throw new Error(`Gemini API error: ${errorMessage}`)
   }
 }

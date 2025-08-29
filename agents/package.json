@@ -1,0 +1,16 @@
+{
+  "name": "shakti-agents",
+  "version": "1.0.0",
+  "description": "Shakti Scribe AI Agents",
+  "main": "core/agentFactory.ts",
+  "scripts": {
+    "test": "npx tsx test-agents.ts",
+    "test-single": "npx tsx test-agents.ts --single",
+    "build": "npx tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.7",
+    "tsx": "^4.0.0",
+    "typescript": "^5.2.2"
+  }
+}
